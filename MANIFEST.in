@@ -1,4 +1,6 @@
 include LICENSE
 include MANIFEST.in
-graft doc
+include AUTHORS
+include README.md
+graft examples
 

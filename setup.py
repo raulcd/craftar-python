@@ -9,7 +9,7 @@ from distutils.core import setup
 
 
 setup(name='catchoom',
-      version='1.0.1',
+      version='1.0.2',
       description="Catchoom Python Library",
       long_description="Catchoom Python Library",
       license="MIT",
