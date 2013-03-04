@@ -26,7 +26,7 @@ The library also provides tools for performing batch operations:
 
 To install the library, simply run:
 
-    pip install git+https://github.com/catchoom/catchoom-python.git
+    pip install git+https://github.com/Catchoom/catchoom-python.git
 
 
 ## Dependencies

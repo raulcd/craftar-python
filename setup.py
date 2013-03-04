@@ -7,11 +7,9 @@
 
 from distutils.core import setup
 
-from catchoom import __versionstr__
-
 
 setup(name='catchoom',
-      version=__versionstr__,
+      version='1.0.1',
       description="Catchoom Python Library",
       long_description="Catchoom Python Library",
       license="MIT",
