@@ -28,6 +28,16 @@ To install the library, simply run:
 
     pip install catchoom
 
+On Windows operating systems we recommend using the library within [Cygwin](http://www.cygwin.com), which provides a Linux look and feel environment:
+
+1. Download [Cywin installer from the official page](http://cygwin.com/install.html).
+2. In the installer wizard, select all python packages, and libmpfr-devel (under libs category).
+3. Open the Cygwin shell and execute the following commands:
+
+    ```python
+    easy_install pip
+    pip install catchoom
+    ```
 
 ## Dependencies
 
