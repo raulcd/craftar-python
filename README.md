@@ -24,20 +24,29 @@ The library also provides tools for performing batch operations:
 
 ## Installation
 
-To install the library, simply run:
+If you already have [Python](http://www.python.org/) and [pip](http://www.pip-installer.org/) on your system you can install the library simply by running:
 
     pip install catchoom
 
-On Windows operating systems we recommend using the library within [Cygwin](http://www.cygwin.com), which provides a Linux look and feel environment:
+In case you first need to install Python or pip, please follow specific instructions for your operating system.
+
+### Windows
+
+On Windows we recommend using the library within [Cygwin](http://www.cygwin.com), which provides a Linux look and feel environment:
 
 1. Download [Cywin installer from the official page](http://cygwin.com/install.html).
 2. In the installer wizard, select all python packages, and libmpfr-devel (under libs category).
 3. Open the Cygwin shell and execute the following commands:
+<pre><code>easy_install pip
+pip install catchoom
+</code></pre>
 
-    ```python
+### Mac OS X
+
+Python comes pre-installed on Mac OS X, so typically you only need to add pip:
+
     easy_install pip
     pip install catchoom
-    ```
 
 ## Dependencies
 
