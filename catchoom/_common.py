@@ -69,8 +69,8 @@ def _get_url(api_key, object_type, uuid=None, limit=None, offset=None,
         resource_name += "/%s" % uuid
 
     url = "%s/api/%s/%s/?api_key=%s" % (settings.MANAGEMENT_HOSTNAME,
-                                        settings.API_VERSION, resource_name,
-                                        api_key)
+                                        settings.MANAGEMENT_API_VERSION,
+                                        resource_name, api_key)
     if limit:
         url += "&limit=%s" % limit
     if offset:

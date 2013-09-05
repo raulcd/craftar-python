@@ -8,7 +8,9 @@
 RECOGNITION_HOSTNAME = 'https://r.catchoom.com'
 MANAGEMENT_HOSTNAME = 'https://crs.catchoom.com'
 
-API_VERSION = "v0"
+RECOGNITION_API_VERSION = "v1"
+MANAGEMENT_API_VERSION = "v0"
+
 USER_AGENT = "Catchoom Python API"
 
 DEFAULT_QUERY_MIN_SIZE = 270  # default image transformation parameters

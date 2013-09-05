@@ -57,7 +57,8 @@ def get_item(api_key, uuid):
 def create_item(api_key, collection, name, url, custom):
     """Create a collection with a given @name, @url and @custom data,
     belonging to @collection"""
-    collection = "/api/%s/collection/%s/" % (settings.API_VERSION, collection)
+    collection = "/api/%s/collection/%s/" % (settings.MANAGEMENT_API_VERSION,
+                                             collection)
     data = {
         'collection': collection,
         'name': name,
@@ -99,7 +100,7 @@ def get_image(api_key, uuid):
 def create_image(api_key, item, filename):
     "Create an image from a @filename, belongs to @item"
     files = {'file': open(filename, 'rb')}
-    item = "/api/%s/item/%s/" % (settings.API_VERSION, item)
+    item = "/api/%s/item/%s/" % (settings.MANAGEMENT_API_VERSION, item)
     data = {'item': item}
     return _create_object_multipart(api_key, "image", files, data)
 
@@ -119,7 +120,8 @@ def get_token_list(api_key, limit, offset, collection=None):
 
 def create_token(api_key, collection):
     "Create a token, belongs to @collection"
-    collection = "/api/%s/collection/%s/" % (settings.API_VERSION, collection)
+    collection = "/api/%s/collection/%s/" % (settings.MANAGEMENT_API_VERSION,
+                                             collection)
     data = {'collection': collection}
     return _create_object(api_key, "token", data)
 

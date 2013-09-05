@@ -16,16 +16,28 @@ from catchoom import settings
 import requests
 
 
-def search(token, filename, color=False,
-           min_size=settings.DEFAULT_QUERY_MIN_SIZE, verbose=False):
-    "Perform a visual recognition using the Catchoom Recognition API"
+def search(token, filename, embed_custom=False, embed_tracking=False,
+           bbox=False, color=False, min_size=settings.DEFAULT_QUERY_MIN_SIZE,
+           verbose=False):
+    """Perform a visual recognition using the Catchoom Recognition API
+    - token: token for the target Collection
+    - filename: image filename that will be recognized
+    - embed_custom: custom_data will be embedded. By default it's a url
+    - embed_tracking: tracking_data will be embedded. By default it's a url
+    - bbox: return bounding boxes
+    """
     image = _prepare_image(filename, color, min_size, verbose)
 
     response = requests.post(
         url="%s/%s/search" % (settings.RECOGNITION_HOSTNAME,
-                              settings.API_VERSION),
+                              settings.RECOGNITION_API_VERSION),
         headers={'User-Agent': settings.USER_AGENT},
-        data={'token': token},
+        data={
+            'token': token,
+            'embed_custom': embed_custom,
+            'embed_tracking': embed_tracking,
+            'bbox': bbox,
+        },
         files={'image': image},
     )
 
