@@ -41,10 +41,7 @@ def search(token, filename, embed_custom=False, embed_tracking=False,
         files={'image': image},
     )
 
-    response.raise_for_status()
-
-    if response.status_code == 200:
-        return response.json()
+    return response.json()
 
 
 def _prepare_image(image_file, color=False,
