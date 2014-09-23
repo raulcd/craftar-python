@@ -27,8 +27,8 @@ def list_paginated_items(api_key, items_per_page=25, collection=None,
     offset = 0
 
     while True:
-        print "- Retrieving items %s to %s..." % \
-            (offset + 1, offset + items_per_page)
+        print("- Retrieving items %s to %s..." % \
+            (offset + 1, offset + items_per_page))
 
         item_list = catchoom.get_item_list(
             api_key=api_key,
@@ -38,10 +38,10 @@ def list_paginated_items(api_key, items_per_page=25, collection=None,
         )
 
         for i in item_list:
-            print "%s: %s" % (i["uuid"], i["name"])
+            print("%s: %s" % (i["uuid"], i["name"]))
         offset += items_per_page
         if len(item_list) < items_per_page:
-            print "No more items!"
+            print("No more items!")
             return
 
 if __name__ == '__main__':

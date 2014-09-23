@@ -1,3 +1,5 @@
+## 1.3.0
+    - Support for python 3
 
 ## 1.2.0
 

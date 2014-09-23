@@ -70,7 +70,7 @@ def upload(api_key, directory, collection_uuid):
         try:
             collection = catchoom.create_collection(
                 api_key, name=collection_name)
-        except Exception, e:
+        except Exception as e:
             sys.stderr.write("Error: couldn't create the collection "
                              "with name %s.\n" % collection_name)
             sys.exit(-1)
@@ -92,9 +92,9 @@ def upload(api_key, directory, collection_uuid):
             # The item is a directory so we will upload all the images inside
             image_list = os.listdir(item_path)
             # Append the item base path to the filenames
-            image_list = map(lambda f: os.path.join(item_path, f), image_list)
+            image_list = [os.path.join(item_path, f) for f in image_list]
             # Keep just the files that are really an image
-            image_list = filter(is_image, image_list)
+            image_list = list(filter(is_image, image_list))
         elif is_image(item_path):
             # The item is just one image
             image_list = [item_path]
@@ -125,7 +125,7 @@ def upload(api_key, directory, collection_uuid):
                     api_key, item=item["uuid"], filename=image
                 )
                 image_count = image_count + 1
-            except Exception, e:
+            except Exception as e:
                 image_error.append((image, str(e)))
 
         if images_before == image_count:
@@ -134,27 +134,27 @@ def upload(api_key, directory, collection_uuid):
             item_count = item_count + 1
 
     if image_error:
-        print "Upload finished with errors:"
+        print("Upload finished with errors:")
     else:
-        print "Upload finished successfully:"
+        print("Upload finished successfully:")
 
-    print "%d items with %d images created" % (item_count, image_count)
+    print("%d items with %d images created" % (item_count, image_count))
 
     if image_error:
-        print "%d images couldn't be uploaded:" % len(image_error)
+        print("%d images couldn't be uploaded:" % len(image_error))
 
         for image, error in image_error:
             path = (image[:-40] and "..") + image[-40:]
-            print " * %-40s - %s" % (path, error)
+            print(" * %-40s - %s" % (path, error))
 
     if image_count > 0:
-        print ("\nThe images are available in collection "
-               "%s with tokens:" % collection["name"])
+        print(("\nThe images are available in collection "
+               "%s with tokens:" % collection["name"]))
         tokens = catchoom.get_token_list(
             api_key, None, None, collection["uuid"]
         )
         for token in tokens:
-            print " * %s" % token["token"]
+            print(" * %s" % token["token"])
 
 
 if __name__ == "__main__":
@@ -182,4 +182,4 @@ if __name__ == "__main__":
         # upload items from the givent directory
         upload(options.api_key, options.directory, options.collection)
     except KeyboardInterrupt:
-        print "Leaving..."
+        print("Leaving...")

@@ -11,7 +11,7 @@ as jpeg).
 """
 
 from PIL import Image
-from StringIO import StringIO
+from io import BytesIO
 from catchoom import settings
 import requests
 
@@ -64,11 +64,11 @@ def _prepare_image(image_file, color=False,
             image = open(image_file, 'rb').read()
         except IOError:
             if verbose:
-                print "Image Opening Error!"
+                print("Image Opening Error!")
             raise
         else:
             if verbose:
-                print "Sending Original Image"
+                print("Sending Original Image")
             # return the original image
             return image
     else:
@@ -78,7 +78,7 @@ def _prepare_image(image_file, color=False,
             image = Image.open(image_file)
         except IOError:
             if verbose:
-                print "Image Opening Error!"
+                print("Image Opening Error!")
             raise
 
         if not color:
@@ -87,11 +87,11 @@ def _prepare_image(image_file, color=False,
                 image = image.convert("L")
             except IOError:
                 if verbose:
-                    print "Image Conversion Error!"
+                    print("Image Conversion Error!")
                 raise
             else:
                 if verbose:
-                    print "Grayscale Conversion"
+                    print("Grayscale Conversion")
 
         if min_size > 0:
             # resize min of height or width to be 'min_size'px
@@ -104,15 +104,15 @@ def _prepare_image(image_file, color=False,
                 image = image.resize((newxsize, newysize))
             except IOError:
                 if verbose:
-                    print "Image Resizing Error"
+                    print("Image Resizing Error")
                 raise
             else:
                 if verbose:
-                    print "Original Image Size (%d,%d)" % (xsize, ysize)
-                    print "Sending Query with Size (%d,%d)" % image.size
+                    print("Original Image Size (%d,%d)" % (xsize, ysize))
+                    print("Sending Query with Size (%d,%d)" % image.size)
 
         # write the converted image into a buffer performing JPEG encoding
-        string_io = StringIO()
+        string_io = BytesIO()
         image.save(string_io, "JPEG", quality=settings.DEFAULT_IMG_QUALITY)
 
         # return the converted image

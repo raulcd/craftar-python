@@ -40,31 +40,31 @@ def search(token, image_list, color, min_size):
         # recognition
         result_list = catchoom.search(token, image, color, min_size)
 
-        print "--> Results for '%s':" % image
+        print("--> Results for '%s':" % image)
 
         target_count += len(result_list)
-        if result_list:
+        if "results" in result_list:
             success_count += 1
 
-            for count, result in enumerate(result_list):
-                print "    %s. %s score: %s" % (count + 1, result['item_id'],
-                                                result['score'])
+            for count, result in enumerate(result_list["results"]):
+                print("    %s. %s score: %s" % (count + 1, result['item']['uuid'],
+                                                result['score']))
         else:
-            print "    No matches found"
+            print("    No matches found")
 
         run_time += (1000 * (time.time() - start_time))
-        print
+        print("")
 
     avg_request_time = int(float(run_time) / float(request_count))
 
-    print "--> Summary:"
-    print "    Total number of requests: %d" % request_count
-    print "    Number of successful recognitions (with matches): %d" \
-        % success_count
-    print "    Number of unrecognised queries: %d" % (request_count -
-                                                      success_count)
-    print "    Total number of retrieved items: %d" % target_count
-    print "    Average query execution time: %dmsec" % avg_request_time
+    print("--> Summary:")
+    print("    Total number of requests: %d" % request_count)
+    print("    Number of successful recognitions (with matches): %d" \
+        % success_count)
+    print("    Number of unrecognised queries: %d" % (request_count -
+                                                      success_count))
+    print("    Total number of retrieved items: %d" % target_count)
+    print("    Average query execution time: %dmsec" % avg_request_time)
 
 
 if __name__ == '__main__':
@@ -107,11 +107,9 @@ if __name__ == '__main__':
         # list all files inside the directory
         try:
             image_list = os.listdir(options.image_path)
-            image_list = map(
-                lambda f: os.path.join(options.image_path, f), image_list
-            )
+            image_list = [os.path.join(options.image_path, f) for f in image_list]
         except OSError as e:
-            print "Search Client Error: %s" % e
+            print("Search Client Error: %s" % e)
             sys.exit(-1)
     else:
         image_list = [options.image_path]
@@ -125,4 +123,4 @@ if __name__ == '__main__':
     try:
         search(options.token, image_list, options.color, min_size)
     except KeyboardInterrupt:
-        print "Leaving..."
+        print("Leaving...")

@@ -28,16 +28,16 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     if hostname:
         catchoom.settings.MANAGEMENT_HOSTNAME = hostname
 
-    print "\n- Retrieving first %s collections..." % items_per_page
+    print("\n- Retrieving first %s collections..." % items_per_page)
     collection_list = catchoom.get_collection_list(
         api_key,
         limit=items_per_page,
         offset=0,
     )
     for collection in collection_list:
-        print "%s: %s" % (collection["uuid"], collection["name"])
+        print("%s: %s" % (collection["uuid"], collection["name"]))
 
-    print "\n- Creating collection..."
+    print("\n- Creating collection...")
     collection = catchoom.create_collection(
         api_key,
         name="My API collection",
@@ -45,30 +45,30 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     collection_uuid = collection["uuid"]
     pprint(collection)
 
-    print "\n- Retrieving collection..."
+    print("\n- Retrieving collection...")
     collection = catchoom.get_collection(
         api_key,
         uuid=collection_uuid,
     )
     pprint(collection)
 
-    print "\n- Updating collection..."
+    print("\n- Updating collection...")
     new_name = "My edited API collection"
     success = catchoom.update_collection(
         api_key,
         uuid=collection_uuid,
         name=new_name,
     )
-    print "Updated: %s, name: '%s'" % (success, new_name)
+    print("Updated: %s, name: '%s'" % (success, new_name))
 
-    print "\n- Retrieving collection..."
+    print("\n- Retrieving collection...")
     collection = catchoom.get_collection(
         api_key,
         uuid=collection_uuid,
     )
     pprint(collection)
 
-    print "\n- Retrieving first %s tokens..." % items_per_page
+    print("\n- Retrieving first %s tokens..." % items_per_page)
     token_list = catchoom.get_token_list(
         api_key,
         limit=items_per_page,
@@ -76,9 +76,9 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         collection=collection_uuid,
     )
     for t in token_list:
-        print "Collection: %s Token: %s" % (t["collection"], t["token"])
+        print("Collection: %s Token: %s" % (t["collection"], t["token"]))
 
-    print "\n- Creating token..."
+    print("\n- Creating token...")
     token = catchoom.create_token(
         api_key,
         collection=collection_uuid,
@@ -86,14 +86,14 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     token_id = token["token"]
     pprint(token)
 
-    print "\n- Deleting token..."
+    print("\n- Deleting token...")
     success = catchoom.delete_token(
         api_key,
         token=token_id,
     )
-    print "Deleted: %s" % success
+    print("Deleted: %s" % success)
 
-    print "\n- Retrieving first %s items..." % items_per_page
+    print("\n- Retrieving first %s items..." % items_per_page)
     item_list = catchoom.get_item_list(
         api_key,
         limit=items_per_page,
@@ -101,9 +101,9 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         collection=collection_uuid,
     )
     for i in item_list:
-        print "%s: %s" % (i["uuid"], i["name"])
+        print("%s: %s" % (i["uuid"], i["name"]))
 
-    print "\n- Creating item..."
+    print("\n- Creating item...")
     item = catchoom.create_item(
         api_key,
         name="My API item",
@@ -114,7 +114,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     item_uuid = item["uuid"]
     pprint(item)
 
-    print "\n- Retrieving first %s items..." % items_per_page
+    print("\n- Retrieving first %s items..." % items_per_page)
     item_list = catchoom.get_item_list(
         api_key,
         limit=items_per_page,
@@ -122,16 +122,16 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         collection=collection_uuid,
     )
     for i in item_list:
-        print "%s: %s" % (i["uuid"], i["name"])
+        print("%s: %s" % (i["uuid"], i["name"]))
 
-    print "\n- Retrieving item..."
+    print("\n- Retrieving item...")
     item = catchoom.get_item(
         api_key,
         uuid=item_uuid,
     )
     pprint(item)
 
-    print "\n- Updating item..."
+    print("\n- Updating item...")
     new_name = "My edited API item"
     success = catchoom.update_item(
         api_key,
@@ -139,16 +139,16 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         name=new_name,
         custom="New Lorem Ipsum",
     )
-    print "Updated: %s, name: '%s'" % (success, new_name)
+    print("Updated: %s, name: '%s'" % (success, new_name))
 
-    print "\n- Retrieving item..."
+    print("\n- Retrieving item...")
     item = catchoom.get_item(
         api_key,
         uuid=item_uuid,
     )
     pprint(item)
 
-    print "\n- Retrieving first %s images..." % items_per_page
+    print("\n- Retrieving first %s images..." % items_per_page)
     image_list = catchoom.get_image_list(
         api_key,
         limit=items_per_page,
@@ -156,9 +156,9 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         item=item_uuid,
     )
     for i in image_list:
-        print "%s: %s" % (i["uuid"], i["name"])
+        print("%s: %s" % (i["uuid"], i["name"]))
 
-    print "\n- Uploading image..."
+    print("\n- Uploading image...")
     image = catchoom.create_image(
         api_key,
         item=item_uuid,
@@ -167,34 +167,34 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     image_uuid = image["uuid"]
     pprint(image)
 
-    print "\n- Retrieving image..."
+    print("\n- Retrieving image...")
     image = catchoom.get_image(
         api_key,
         uuid=image_uuid,
     )
-    print "uuid: %s" % image["uuid"]
+    print("uuid: %s" % image["uuid"])
     pprint(image)
 
-    print "\n- Deleting image..."
+    print("\n- Deleting image...")
     success = catchoom.delete_image(
         api_key,
         uuid=image_uuid,
     )
-    print "Deleted: %s" % success
+    print("Deleted: %s" % success)
 
-    print "\n- Deleting item..."
+    print("\n- Deleting item...")
     success = catchoom.delete_item(
         api_key,
         uuid=item_uuid,
     )
-    print "Deleted: %s" % success
+    print("Deleted: %s" % success)
 
-    print "\n- Deleting collection..."
+    print("\n- Deleting collection...")
     success = catchoom.delete_collection(
         api_key,
         uuid=collection_uuid,
     )
-    print "Deleted: %s" % success
+    print("Deleted: %s" % success)
 
 
 if __name__ == '__main__':

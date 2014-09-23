@@ -40,7 +40,7 @@ from distutils.core import setup
 
 
 setup(name='catchoom',
-      version='1.2.0',
+      version='1.3.0',
       description="Catchoom Python Library",
       long_description=__doc__,
       license="MIT",
@@ -70,5 +70,5 @@ setup(name='catchoom',
       bugtrack_url="https://github.com/Catchoom/catchoom-python/issues",
       packages=["catchoom"],
       scripts=['bin/catchoom_search', 'bin/catchoom_upload'],
-      install_requires=["requests==1.1.0", "Pillow==1.7.8"]
+      install_requires=["requests==2.4.1", "Pillow==2.5.3"]
       )
