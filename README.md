@@ -6,6 +6,11 @@ The CraftAR Service for [Augmented Reality and Image Recognition](http://catchoo
 that allows you to build a wide range of __Image Recognition__ and __Augmented Reality__ applications
 and services.
 
+With CraftAR, you can create amazing apps that provide digital content
+for real-life objects like printed media, packaging among others. You
+can use our online web panel or APIs, to upload images to be recognized and set
+content to display upon recognition in your CraftAR-powered app.
+
 This client library provides access to CraftAR APIs:
 - [CraftAR Image Recognition API]
 (http://catchoom.com/documentation/api/recognition/)
