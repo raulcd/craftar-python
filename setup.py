@@ -46,7 +46,7 @@ setup(name='craftar',
       license="MIT",
       keywords="catchoom craftar image recognition",
       classifiers=[
-          "Development Status :: 5 - Stable",
+          "Development Status :: 5 - Production/Stable",
           "Environment :: Console",
           "Intended Audience :: Developers",
           "Intended Audience :: Information Technology",
