@@ -21,15 +21,15 @@ This client library provides access to CraftAR APIs:
   All requests must be authenticated using your _Management API key_.
 
 The library also provides tools for performing batch operations:
-- [catchoom_search](bin/catchoom_search), for Image Recognition.
-- [catchoom_upload](bin/catchoom_upload), for batch upload of images.
+- [craftar_search](bin/craftar_search), for Image Recognition.
+- [craftar_upload](bin/craftar_upload), for batch upload of images.
 
 
 ## Installation
 
 If you already have [Python](http://www.python.org/) and [pip](http://www.pip-installer.org/) on your system you can install the library simply by running:
 
-    pip install catchoom
+    pip install craftar
 
 In case you first need to install Python or pip, please follow specific instructions for your operating system.
 
@@ -41,7 +41,7 @@ On Windows we recommend using the library within [Cygwin](http://www.cygwin.com)
 2. In the installer wizard, select all python packages, and libmpfr-devel (under libs category).
 3. Open the Cygwin shell and execute the following commands:
 <pre><code>easy_install pip
-pip install catchoom
+pip install craftar
 </code></pre>
 
 ### Mac OS X
@@ -49,7 +49,7 @@ pip install catchoom
 Python comes pre-installed on Mac OS X, so typically you only need to add pip:
 
     easy_install pip
-    pip install catchoom
+    pip install craftar
 
 ## Dependencies
 
@@ -69,7 +69,7 @@ You can do it directly from your python interpreter.
 This is needed to authenticate your requests to the Management API.
     
     ```python
-    import catchoom
+    import craftar
     
     # use your own api_key!
     api_key = "35d5919334816e239bba08637e6aa457e8ca92c8"
@@ -79,15 +79,15 @@ This is needed to authenticate your requests to the Management API.
     
     ```python
     name = "My cool colection" # use your own collection name
-    collection = catchoom.create_collection(api_key, name)
+    collection = craftar.create_collection(api_key, name)
     ```
 
 3. Keep the _token_ of that _collection_, you will need it later for
 the recognition:
 
     ```python
-    token_list = catchoom.get_token_list(api_key, limit=1, offset=0,
-                                         collection=collection["uuid"])
+    token_list = craftar.get_token_list(api_key, limit=1, offset=0,
+                                        collection=collection["uuid"])
     token = token_list[0]["token"] # first token on the list
     ```
 
@@ -95,13 +95,12 @@ the recognition:
 
     ```python
     name = "My cool item" # use your own item name
-    url = "http://catchoom.com" # and your own url
+    url = "http://example.com" # and your own url
     custom = "This is my custom data" # and your own custom data
-    item = catchoom.create_item(api_key, collection["uuid"], name, url, custom)
+    item = craftar.create_item(api_key, collection["uuid"], name, url, custom)
     ```
 
 5. Upload an _image_ representing your _item_.
-  - You can use one of the [reference images examples](images/reference).
   - Every _item_ can be represented by one or more reference _images_.
     This is useful for _items_ that have different faces, e.g. cereal boxes.
   - Before performing a successful recognition, the corresponding reference
@@ -109,18 +108,17 @@ the recognition:
     less than one second after uploading.
 
     ```python
-    filename = "catchy.png" # use your own image
-    image = catchoom.create_image(api_key, item["uuid"], filename)
+    filename = "reference.jpg" # use your own image
+    image = craftar.create_image(api_key, item["uuid"], filename)
     ```
 
 6. Now you are ready to perform the image recognition request against your collection.
-  - You can use one of the [query images examples](images/query). You will also
-    need the _token_ you saved in step 3 and the image to be recognized.
+  - You will also need the _token_ you saved in step 3 and the image to be recognized.
 
     ```python
     # remember that you set _token_ in step 3
-    filename = "query_01.jpg" # use your own query image
-    result_list = catchoom.search(token, filename)
+    filename = "query.jpg" # use your own query image
+    result_list = craftar.search(token, filename)
     ```
 
 7. Done! You can print the result:
@@ -135,11 +133,11 @@ the recognition:
 ## Scripts
 
 The scripts under [/bin](bin) allow batch operations against the APIs:
-- [catchoom_search](bin/catchoom_search) sends one or several Image Recognition
+- [craftar_search](bin/craftar_search) sends one or several Image Recognition
   requests against the CraftAR Service.
   Specifically, it performs visual scans against the _collection_
   (specified by the _token_) using every image in the provided directory.
-- [catchoom_upload](bin/catchoom_upload) uploads a set of reference _images_
+- [craftar_upload](bin/craftar_upload) uploads a set of reference _images_
   to the CraftAR Service. It iterates over the contents of
   the specified directory and uploads all the images (and, if provided,
   also their associated metadata) to a new or an existing _collection_.
@@ -158,7 +156,7 @@ under the [examples](examples) folder:
   _item_, _image_, _token_).
 
 For the reference implementation of the recognition operation see
-the script [catchoom_search](bin/catchoom_search) script under [/bin](bin).
+the script [craftar_search](bin/craftar_search) script under [/bin](bin).
 
 ## Images
 
@@ -172,5 +170,5 @@ These are some images you can use in your tests:
 ## Reporting Issues
 
 If you have suggestions, bugs or other issues specific to this library, file
-them [here](https://github.com/Catchoom/catchoom-python/issues) or contact us
+them [here](https://github.com/Catchoom/craftar-python/issues) or contact us
 at [support@catchoom.com](mailto:support@catchoom.com).

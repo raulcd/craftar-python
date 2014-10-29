@@ -1,13 +1,13 @@
 #  (C) Catchoom Technologies S.L.
 #  Licensed under the MIT license.
-#  https://github.com/catchoom/catchoom-python/blob/master/LICENSE
+#  https://github.com/catchoom/craftar-python/blob/master/LICENSE
 #  All warranties and liabilities are disclaimed.
 
-"Provides functions for accessing the Catchoom Management API."
+"Provides functions for accessing the CraftAR's management API."
 
-from catchoom._common import _get_object_list, _get_object, _create_object, \
+from craftar._common import _get_object_list, _get_object, _create_object, \
     _create_object_multipart, _update_object, _delete_object
-from catchoom import settings
+from craftar import settings
 
 
 # Collections

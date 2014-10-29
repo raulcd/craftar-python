@@ -1,14 +1,14 @@
 #  (C) Catchoom Technologies S.L.
 #  Licensed under the MIT license.
-#  https://github.com/catchoom/catchoom-python/blob/master/LICENSE
+#  https://github.com/catchoom/craftar-python/blob/master/LICENSE
 #  All warranties and liabilities are disclaimed.
 
-"Provides common internal utility fuctions for accessing the Catchoom APIs."
+"Provides common internal utility fuctions for accessing CraftAR's API"
 
 import json
 import re
 import requests
-from catchoom import settings
+from craftar import settings
 
 HEADERS = {
     'User-Agent': settings.USER_AGENT,

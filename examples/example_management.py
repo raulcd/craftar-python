@@ -1,11 +1,11 @@
 #  (C) Catchoom Technologies S.L.
 #  Licensed under the MIT license.
-#  https://github.com/catchoom/catchoom-python/blob/master/LICENSE
+#  https://github.com/catchoom/craftar-python/blob/master/LICENSE
 #  All warranties and liabilities are disclaimed.
 
 from optparse import OptionParser
 from pprint import pprint
-import catchoom
+import craftar
 
 """
 Demonstrates listing, creation, updating and deletion of every type of object
@@ -22,14 +22,14 @@ https://crs.catchoom.com/accounts/apis/
 def run_management(api_key, filename, items_per_page=5, hostname=None):
     """
     Basic example of listing, creating, updating and finally deleting
-    each type of object, using the Catchoom Management API.
+    each type of object, using CraftAR's Management API.
     """
 
     if hostname:
-        catchoom.settings.MANAGEMENT_HOSTNAME = hostname
+        craftar.settings.MANAGEMENT_HOSTNAME = hostname
 
     print("\n- Retrieving first %s collections..." % items_per_page)
-    collection_list = catchoom.get_collection_list(
+    collection_list = craftar.get_collection_list(
         api_key,
         limit=items_per_page,
         offset=0,
@@ -38,7 +38,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         print("%s: %s" % (collection["uuid"], collection["name"]))
 
     print("\n- Creating collection...")
-    collection = catchoom.create_collection(
+    collection = craftar.create_collection(
         api_key,
         name="My API collection",
     )
@@ -46,7 +46,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     pprint(collection)
 
     print("\n- Retrieving collection...")
-    collection = catchoom.get_collection(
+    collection = craftar.get_collection(
         api_key,
         uuid=collection_uuid,
     )
@@ -54,7 +54,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
 
     print("\n- Updating collection...")
     new_name = "My edited API collection"
-    success = catchoom.update_collection(
+    success = craftar.update_collection(
         api_key,
         uuid=collection_uuid,
         name=new_name,
@@ -62,14 +62,14 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     print("Updated: %s, name: '%s'" % (success, new_name))
 
     print("\n- Retrieving collection...")
-    collection = catchoom.get_collection(
+    collection = craftar.get_collection(
         api_key,
         uuid=collection_uuid,
     )
     pprint(collection)
 
     print("\n- Retrieving first %s tokens..." % items_per_page)
-    token_list = catchoom.get_token_list(
+    token_list = craftar.get_token_list(
         api_key,
         limit=items_per_page,
         offset=0,
@@ -79,7 +79,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         print("Collection: %s Token: %s" % (t["collection"], t["token"]))
 
     print("\n- Creating token...")
-    token = catchoom.create_token(
+    token = craftar.create_token(
         api_key,
         collection=collection_uuid,
     )
@@ -87,14 +87,14 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     pprint(token)
 
     print("\n- Deleting token...")
-    success = catchoom.delete_token(
+    success = craftar.delete_token(
         api_key,
         token=token_id,
     )
     print("Deleted: %s" % success)
 
     print("\n- Retrieving first %s items..." % items_per_page)
-    item_list = catchoom.get_item_list(
+    item_list = craftar.get_item_list(
         api_key,
         limit=items_per_page,
         offset=0,
@@ -104,7 +104,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         print("%s: %s" % (i["uuid"], i["name"]))
 
     print("\n- Creating item...")
-    item = catchoom.create_item(
+    item = craftar.create_item(
         api_key,
         name="My API item",
         collection=collection_uuid,
@@ -115,7 +115,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     pprint(item)
 
     print("\n- Retrieving first %s items..." % items_per_page)
-    item_list = catchoom.get_item_list(
+    item_list = craftar.get_item_list(
         api_key,
         limit=items_per_page,
         offset=0,
@@ -125,7 +125,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         print("%s: %s" % (i["uuid"], i["name"]))
 
     print("\n- Retrieving item...")
-    item = catchoom.get_item(
+    item = craftar.get_item(
         api_key,
         uuid=item_uuid,
     )
@@ -133,7 +133,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
 
     print("\n- Updating item...")
     new_name = "My edited API item"
-    success = catchoom.update_item(
+    success = craftar.update_item(
         api_key,
         uuid=item_uuid,
         name=new_name,
@@ -142,14 +142,14 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     print("Updated: %s, name: '%s'" % (success, new_name))
 
     print("\n- Retrieving item...")
-    item = catchoom.get_item(
+    item = craftar.get_item(
         api_key,
         uuid=item_uuid,
     )
     pprint(item)
 
     print("\n- Retrieving first %s images..." % items_per_page)
-    image_list = catchoom.get_image_list(
+    image_list = craftar.get_image_list(
         api_key,
         limit=items_per_page,
         offset=0,
@@ -159,7 +159,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
         print("%s: %s" % (i["uuid"], i["name"]))
 
     print("\n- Uploading image...")
-    image = catchoom.create_image(
+    image = craftar.create_image(
         api_key,
         item=item_uuid,
         filename=filename,
@@ -168,7 +168,7 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     pprint(image)
 
     print("\n- Retrieving image...")
-    image = catchoom.get_image(
+    image = craftar.get_image(
         api_key,
         uuid=image_uuid,
     )
@@ -176,21 +176,21 @@ def run_management(api_key, filename, items_per_page=5, hostname=None):
     pprint(image)
 
     print("\n- Deleting image...")
-    success = catchoom.delete_image(
+    success = craftar.delete_image(
         api_key,
         uuid=image_uuid,
     )
     print("Deleted: %s" % success)
 
     print("\n- Deleting item...")
-    success = catchoom.delete_item(
+    success = craftar.delete_item(
         api_key,
         uuid=item_uuid,
     )
     print("Deleted: %s" % success)
 
     print("\n- Deleting collection...")
-    success = catchoom.delete_collection(
+    success = craftar.delete_collection(
         api_key,
         uuid=collection_uuid,
     )
@@ -209,7 +209,7 @@ if __name__ == '__main__':
     parser.add_option('-H', '--hostname',
                       dest='hostname',
                       default=False,
-                      help='Hostname of the Catchoom Recognition Platform')
+                      help='CraftAR management API hostname')
     (options, args) = parser.parse_args()
 
     if not options.api_key:

@@ -2,19 +2,18 @@
 #
 #  (C) Catchoom Technologies S.L.
 #  Licensed under the MIT license.
-#  https://github.com/catchoom/catchoom-python/blob/master/LICENSE
+#  https://github.com/catchoom/craftar-python/blob/master/LICENSE
 #  All warranties and liabilities are disclaimed.
 
 """%prog -t TOKEN -p IMAGE_PATH [-c] [-s MIN_SIZE] [-h]
 
-Script to perform one or several recognition queries against Catchoom
-Recognition Service (CRS).
+Script to perform one or several recognition queries against CraftAR
 
 The script will perform visual scans against the collection (specified
 by the token) using every image in the provided directory.
 """
 
-import catchoom
+import craftar
 
 import optparse
 import os
@@ -30,7 +29,7 @@ def search(token, image_list, color, min_size):
 
     # iterate through all query images and perform recognition
     for image in image_list:
-        if not image.endswith(catchoom.settings.ALLOWED_IMG_EXTENSIONS):
+        if not image.endswith(craftar.settings.ALLOWED_IMG_EXTENSIONS):
             continue
 
         request_count += 1
@@ -38,7 +37,7 @@ def search(token, image_list, color, min_size):
         start_time = time.time()
 
         # recognition
-        result_list = catchoom.search(token, image, color, min_size)
+        result_list = craftar.search(token, image, color, min_size)
 
         print("--> Results for '%s':" % image)
 
@@ -118,7 +117,7 @@ if __name__ == '__main__':
     if options.min_size:
         min_size = options.min_size
     else:
-        min_size = catchoom.settings.DEFAULT_QUERY_MIN_SIZE
+        min_size = craftar.settings.DEFAULT_QUERY_MIN_SIZE
 
     try:
         search(options.token, image_list, options.color, min_size)

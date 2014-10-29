@@ -1,9 +1,9 @@
 #  (C) Catchoom Technologies S.L.
 #  Licensed under the MIT license.
-#  https://github.com/catchoom/catchoom-python/blob/master/LICENSE
+#  https://github.com/catchoom/craftar-python/blob/master/LICENSE
 #  All warranties and liabilities are disclaimed.
 
-""" Provides the function for visual recogn. with the Catchoom Recognition API.
+""" Provides the function for visual recogn. with CraftAR's API.
 
 Before a single query request is sent, the image is loaded from disk, and,
 if needed, transformed (i.e. resized, converted to grayscale, and compressed
@@ -12,14 +12,14 @@ as jpeg).
 
 from PIL import Image
 from io import BytesIO
-from catchoom import settings
+from craftar import settings
 import requests
 
 
 def search(token, filename, embed_custom=False, embed_tracking=False,
            bbox=False, color=False, min_size=settings.DEFAULT_QUERY_MIN_SIZE,
            verbose=False):
-    """Perform a visual recognition using the Catchoom Recognition API
+    """Perform a visual recognition using CraftAR's API
     - token: token for the target Collection
     - filename: image filename that will be recognized
     - embed_custom: custom_data will be embedded. By default it's a url

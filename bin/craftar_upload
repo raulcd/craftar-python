@@ -2,13 +2,12 @@
 #
 #  (C) Catchoom Technologies S.L.
 #  Licensed under the MIT license.
-#  https://github.com/catchoom/catchoom-python/blob/master/LICENSE
+#  https://github.com/catchoom/craftar-python/blob/master/LICENSE
 #  All warranties and liabilities are disclaimed.
 
 """%prog -a <api_key> -d <directory> [-c collection]
 
-Script to upload a set of reference images to the Catchoom Recognition
-Service (CRS).
+Script to upload a set of reference images to CraftAR
 
 It iterates over the contents of the specified directory and
 uploads all the images to a new or an existing collection.
@@ -33,8 +32,8 @@ import os
 import mimetypes
 import sys
 
-import catchoom
-import catchoom.settings
+import craftar
+import craftar.settings
 
 
 def parse_metadata(metadata_path):
@@ -64,11 +63,11 @@ def upload(api_key, directory, collection_uuid):
 
     if collection_uuid:
         # Check if the specified collection exists
-        collection = catchoom.get_collection(api_key, uuid=collection_uuid)
+        collection = craftar.get_collection(api_key, uuid=collection_uuid)
     else:
         collection_name = os.path.basename(directory)
         try:
-            collection = catchoom.create_collection(
+            collection = craftar.create_collection(
                 api_key, name=collection_name)
         except Exception as e:
             sys.stderr.write("Error: couldn't create the collection "
@@ -111,7 +110,7 @@ def upload(api_key, directory, collection_uuid):
         item_url = metadata.get("url", "")
         item_custom = metadata.get("custom", "")
 
-        item = catchoom.create_item(
+        item = craftar.create_item(
             api_key, collection=collection["uuid"],
             name=item_name, url=item_url, custom=item_custom
         )
@@ -121,7 +120,7 @@ def upload(api_key, directory, collection_uuid):
         # Iterate over all the images in the list and upload them to the item
         for image in image_list:
             try:
-                image = catchoom.create_image(
+                image = craftar.create_image(
                     api_key, item=item["uuid"], filename=image
                 )
                 image_count = image_count + 1
@@ -129,7 +128,7 @@ def upload(api_key, directory, collection_uuid):
                 image_error.append((image, str(e)))
 
         if images_before == image_count:
-            catchoom.delete_item(api_key, item["uuid"])
+            craftar.delete_item(api_key, item["uuid"])
         else:
             item_count = item_count + 1
 
@@ -150,7 +149,7 @@ def upload(api_key, directory, collection_uuid):
     if image_count > 0:
         print(("\nThe images are available in collection "
                "%s with tokens:" % collection["name"]))
-        tokens = catchoom.get_token_list(
+        tokens = craftar.get_token_list(
             api_key, None, None, collection["uuid"]
         )
         for token in tokens:
