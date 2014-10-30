@@ -158,15 +158,6 @@ under the [examples](examples) folder:
 For the reference implementation of the recognition operation see
 the script [craftar_search](bin/craftar_search) script under [/bin](bin).
 
-## Images
-
-These are some images you can use in your tests:
-- Images under [reference image](images/reference) can be uploaded
-  to your collection.
-- Images under [query images](images/query) can be used to perform
-  image recognition against your collection.
-
-
 ## Reporting Issues
 
 If you have suggestions, bugs or other issues specific to this library, file
