@@ -13,7 +13,7 @@ MANAGEMENT_HOSTNAME = 'https://my.craftar.net'
 RECOGNITION_API_VERSION = "v1"
 MANAGEMENT_API_VERSION = "v0"
 
-USER_AGENT = "CraftAR/1.3.1 (python %s)" % platform.python_version()
+USER_AGENT = "CraftAR/1.3.2 (python %s)" % platform.python_version()
 
 DEFAULT_QUERY_MIN_SIZE = 270  # default image transformation parameters
 DEFAULT_IMG_QUALITY = 80  # for jpeg compression, recommended range [75-85]
