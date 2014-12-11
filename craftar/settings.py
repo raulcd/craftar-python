@@ -5,8 +5,10 @@
 
 "Default settings"
 
-RECOGNITION_HOSTNAME = 'https://r.catchoom.com'
-MANAGEMENT_HOSTNAME = 'https://crs.catchoom.com'
+import platform
+
+RECOGNITION_HOSTNAME = 'https://search.craftar.net'
+MANAGEMENT_HOSTNAME = 'https://my.craftar.net'
 
 RECOGNITION_API_VERSION = "v1"
 MANAGEMENT_API_VERSION = "v0"

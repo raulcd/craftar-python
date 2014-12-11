@@ -30,7 +30,7 @@ To use our service you need a `CraftAR`_ account.
 You can get our `code`_, check the `README`_ and file bugs in the
 `issue tracker`_.
 
-.. _CraftAR: https://crs.catchoom.com
+.. _CraftAR: https://my.craftar.net
 .. _Catchoom: http://catchoom.com
 .. _code: https://github.com/Catchoom/craftar-python
 .. _README: https://github.com/Catchoom/craftar-python/blob/master/README.md

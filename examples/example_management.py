@@ -11,9 +11,9 @@ import craftar
 Demonstrates listing, creation, updating and deletion of every type of object
 (i.e. collection, item, reference image, and collection token).
 
-- Requires an account at https://crs.catchoom.com
+- Requires an account at https://my.craftar.net
 - The @api_key is your management api key. Get it at
-https://crs.catchoom.com/accounts/apis/
+https://my.craftar.net/accounts/apis/
 - The @filename is a valid reference image filename.
 - Don't set the @hostname, unless you are using a custom platform.
 """

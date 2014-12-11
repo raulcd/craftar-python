@@ -65,7 +65,7 @@ of _items_ representing entities that you want to recognize. Examples of _items_
 are logos, physical objects, or a drawings, among others.
 You can do it directly from your python interpreter.
 
-1. Get [your management api_key](https://crs.catchoom.com/api_access/).
+1. Get [your management api_key](https://my.craftar.net/api_access/).
 This is needed to authenticate your requests to the Management API.
     
     ```python

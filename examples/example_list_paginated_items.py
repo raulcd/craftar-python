@@ -9,9 +9,9 @@ import craftar
 """
 Lists all your items. If needed, they can be limited to a specific collection.
 
-- Requires an account and a collection with items at https://crs.catchoom.com
+- Requires an account and a collection with items at https://my.craftar.net
 - The @api_key is your management api key. Get it at
-https://crs.catchoom.com/accounts/apis/
+https://my.craftar.net/accounts/apis/
 - You can limit the result to a specific @collection.
 - Don't set the @hostname, unless you are using a custom platform.
 """
