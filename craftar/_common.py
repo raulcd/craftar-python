@@ -51,11 +51,17 @@ def _parse_object(_object):
     if "resource_uri" in _object:
         del _object["resource_uri"]
 
-    # parse collection and item: set the uuid instead of the api uri
-    keys_to_parse = ["collection", "item"]
+    # parse collection, item, app and version: set uuid instead of api uri
+    keys_to_parse = ["collection", "item", "version", "app"]
     for key in keys_to_parse:
         if key in _object:
             _object[key] = _object[key].split("/")[-2]
+
+    # parse collections and tags
+    keys_to_parse = ["collections", "tags"]
+    for key in keys_to_parse:
+        if key in _object:
+            _object[key] = map(lambda uri: uri.split("/")[-2], _object[key])
 
     return _object
 

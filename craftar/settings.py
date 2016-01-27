@@ -19,4 +19,5 @@ DEFAULT_QUERY_MIN_SIZE = 240  # default image transformation parameters
 DEFAULT_IMG_QUALITY = 80  # for jpeg compression, recommended range [75-85]
 
 ALLOWED_IMG_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG')
-ALLOWED_OBJECT_TYPES = ["collection", "item", "image", "token", "media"]
+ALLOWED_OBJECT_TYPES = ["collection", "item", "image", "token", "media",
+                        "tag", "version", "collectionbundle", "app"]
