@@ -10,7 +10,7 @@ import platform
 RECOGNITION_HOSTNAME = 'https://search.craftar.net'
 MANAGEMENT_HOSTNAME = 'https://my.craftar.net'
 
-RECOGNITION_API_VERSION = "v1"
+RECOGNITION_API_VERSION = "v2"
 MANAGEMENT_API_VERSION = "v0"
 
 USER_AGENT = "CraftAR/1.3.3 (python %s)" % platform.python_version()

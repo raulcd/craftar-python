@@ -17,8 +17,8 @@ import requests
 
 
 def search(token, filename, embed_custom=False, embed_tracking=False,
-           bbox=False, color=False, min_size=settings.DEFAULT_QUERY_MIN_SIZE,
-           verbose=False):
+           bbox=False, app_id=None, version=None, color=False,
+           min_size=settings.DEFAULT_QUERY_MIN_SIZE, verbose=False):
     """Performs a visual recognition using CraftAR's API.
 
     Arguments:
@@ -27,6 +27,7 @@ def search(token, filename, embed_custom=False, embed_tracking=False,
       embed_custom   - custom_data will be embedded.
       embed_tracking - tracking_data will be embedded.
       bbox           - Return bounding boxes.
+      app_id         - Application id for signing the tracking data.
       color          - Disables grayscale conversion.
                        Often color images do not give better results.
       min_size       - Sets the shorter dimension for query resizing.
@@ -45,11 +46,30 @@ def search(token, filename, embed_custom=False, embed_tracking=False,
         headers={'User-Agent': settings.USER_AGENT},
         data={
             'token': token,
-            'embed_custom': embed_custom,
-            'embed_tracking': embed_tracking,
-            'bbox': bbox,
+            'embed_custom': embed_custom and 'true' or 'false',
+            'embed_tracking': embed_tracking and 'true' or 'false',
+            'bbox': bbox and 'true' or 'false',
+            'app_id': app_id,
+            'version': version,
         },
         files={'image': image},
+    )
+
+    return response.json()
+
+
+def sync(token, app_id, version, bundled=True, tag=None):
+    response = requests.post(
+        url="%s/%s/sync" % (settings.RECOGNITION_HOSTNAME,
+                            settings.RECOGNITION_API_VERSION),
+        headers={'User-Agent': settings.USER_AGENT},
+        data={
+            'token': token,
+            'app_id': app_id,
+            'version': version,
+            'bundled': bundled and 'true' or 'false',
+            'tag': tag,
+        },
     )
 
     return response.json()

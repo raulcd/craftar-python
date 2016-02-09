@@ -5,5 +5,5 @@
 
 "Provides access to the CraftAR API"
 
-from craftar._recognition import search
+from craftar._recognition import search, sync
 from craftar._management import *
