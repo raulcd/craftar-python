@@ -69,6 +69,7 @@ def upload(api_key, directory, collection_uuid):
         try:
             collection = craftar.create_collection(
                 api_key, name=collection_name)
+            print "--> Created collection '%s'" % collection_name
         except Exception as e:
             sys.stderr.write("Error: couldn't create the collection "
                              "with name %s.\n" % collection_name)
@@ -112,8 +113,10 @@ def upload(api_key, directory, collection_uuid):
 
         item = craftar.create_item(
             api_key, collection=collection["uuid"],
-            name=item_name, url=item_url, custom=item_custom
+            name=item_name, url=item_url, custom=item_custom, trackable=False
         )
+
+        print "(%s) -> Created item '%s'" % (item_count, item["name"])
 
         images_before = image_count
 
@@ -124,11 +127,14 @@ def upload(api_key, directory, collection_uuid):
                     api_key, item=item["uuid"], filename=image
                 )
                 image_count = image_count + 1
+                print "    uploaded image '%s' " % image["name"]
             except Exception as e:
                 image_error.append((image, str(e)))
 
+
         if images_before == image_count:
             craftar.delete_item(api_key, item["uuid"])
+            print("    errors uploading images - item deleted")
         else:
             item_count = item_count + 1
 

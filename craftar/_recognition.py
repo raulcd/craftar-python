@@ -19,12 +19,23 @@ import requests
 def search(token, filename, embed_custom=False, embed_tracking=False,
            bbox=False, color=False, min_size=settings.DEFAULT_QUERY_MIN_SIZE,
            verbose=False):
-    """Perform a visual recognition using CraftAR's API
-    - token: token for the target Collection
-    - filename: image filename that will be recognized
-    - embed_custom: custom_data will be embedded. By default it's a url
-    - embed_tracking: tracking_data will be embedded. By default it's a url
-    - bbox: return bounding boxes
+    """Performs a visual recognition using CraftAR's API.
+
+    Arguments:
+      token          - Token for the target collection.
+      filename       - Path to the query image file.
+      embed_custom   - custom_data will be embedded.
+      embed_tracking - tracking_data will be embedded.
+      bbox           - Return bounding boxes.
+      color          - Disables grayscale conversion.
+                       Often color images do not give better results.
+      min_size       - Sets the shorter dimension for query resizing.
+                       The default value provides good recognition
+                       results and small round-trip times for most cases.
+                       Recognition of objects covering <1/4 of the scene
+                       may require higher values.
+                       Rescaling can be disabled by using using min_size = -1.
+      verbose        - Shows all image transformations performed to the query.
     """
     image = _prepare_image(filename, color, min_size, verbose)
 
@@ -48,14 +59,15 @@ def _prepare_image(image_file, color=False,
                    min_size=settings.DEFAULT_QUERY_MIN_SIZE, verbose=True):
     """Loads a single query image from disk and prepares it for sending.
 
-    If no conversions are used, then the loaded image is returned unchanged.
-    Otherwise, the image is converted using PIL and encoded as a JPEG image.
+    If no conversion is used, then the loaded image is returned unchanged.
+    Otherwise, the image is converted using PILLOW and encoded as a JPEG image.
     Arguments:
-      image_file - Path to the image file.
-      color      - Indicates whether to switch-off the grayscale convertion.
-      min_size   - Defines minimum width or height of the image to be sent.
-                   To switch-off the rescaling use min_size = -1.
-      verbose    - Controls the verbose mode.
+      image_file - Path to the query image file.
+      color      - Disables grayscale conversion.
+                   Often color images do not give better result.
+      min_size   - Sets the shorter dimension for query resizing.
+                   Rescaling can be disabled by using using min_size = -1.
+      verbose    - Shows all image transformations performed to the query.
     """
     # check if image conversions needed
     if color and min_size <= 0:

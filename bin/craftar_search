@@ -5,12 +5,16 @@
 #  https://github.com/catchoom/craftar-python/blob/master/LICENSE
 #  All warranties and liabilities are disclaimed.
 
-"""%prog -t TOKEN -p IMAGE_PATH [-c] [-s MIN_SIZE] [-h]
+"""%prog -t TOKEN -p IMAGE_PATH [-c] [-s MIN_SIZE] [-v] [-h]
 
 Script to perform one or several recognition queries against CraftAR
 
 The script will perform visual scans against the collection (specified
 by the token) using every image in the provided directory.
+
+Use option -v to see image transformations applied to queries.
+
+Use option -h to see additional parameters controlling the image quality.
 """
 
 import craftar
@@ -21,7 +25,7 @@ import sys
 import time
 
 
-def search(token, image_list, color, min_size):
+def search(token, image_list, color, min_size, verbose):
     success_count = 0
     request_count = 0
     target_count = 0
@@ -33,25 +37,33 @@ def search(token, image_list, color, min_size):
             continue
 
         request_count += 1
+
+        print("(%s) -> Results for '%s':" % (request_count, image) )
+
         # store request start time
         start_time = time.time()
 
         # recognition
-        result_list = craftar.search(token, image, color, min_size)
+        search_response = craftar.search(token, image, False, False, False, \
+                                         color, min_size, verbose)
 
-        print("--> Results for '%s':" % image)
+        run_time += (1000 * (time.time() - start_time))
+
+        result_list = search_response["results"]
 
         target_count += len(result_list)
-        if "results" in result_list:
+
+        if result_list:
             success_count += 1
 
-            for count, result in enumerate(result_list["results"]):
-                print("    %s. %s score: %s" % (count + 1, result['item']['uuid'],
-                                                result['score']))
+            for count, result in enumerate(result_list):
+                print("    %s. %s    uuid: %s    score: %s" % (count + 1, \
+                    result['item']['name'], result['item']['uuid'], \
+                    result['score']))
         else:
             print("    No matches found")
 
-        run_time += (1000 * (time.time() - start_time))
+
         print("")
 
     avg_request_time = int(float(run_time) / float(request_count))
@@ -63,7 +75,7 @@ def search(token, image_list, color, min_size):
     print("    Number of unrecognised queries: %d" % (request_count -
                                                       success_count))
     print("    Total number of retrieved items: %d" % target_count)
-    print("    Average query execution time: %dmsec" % avg_request_time)
+    print("    Average round-trip time: %dmsec" % avg_request_time)
 
 
 if __name__ == '__main__':
@@ -71,24 +83,29 @@ if __name__ == '__main__':
     parser = optparse.OptionParser(usage=__doc__, version="%prog 1.0")
     parser.add_option("-t", "--token",
                       dest="token",
-                      help="Collection token")
+                      help="Collection token.")
     parser.add_option("-p", "--image-path",
                       dest="image_path",
-                      help="Path to an image or a directory containing them.")
+                      help="Path to an image or a directory of images.")
     parser.add_option("-c", "--color",
                       action="store_true",
                       dest="color",
-                      help="Switches-off grayscale conversion;"
-                           "in most cases, switching-off grayscale "
-                           "conversion does not improve the result.")
+                      help="Disables grayscale conversion. "
+                           "But often color images do not give better results.")
     parser.add_option("-s", "--size",
                       dest="min_size",
                       type="int",
-                      help="Defines the size of the shorter dimension of the "
-                           "query image; default value 270px provides good "
-                           "recognition results and small roundtrip time for "
-                           "most cases; minimum recommended value is 225px;"
-                           "rescaling can be switched-off by using -s -1.")
+                      help="Sets the shorter dimension for query resizing. "
+                           "Default value provides good recognition results "
+                           "and small round-trip times for most cases. "
+                           "Recognition of objects covering <1/4 of the scene "
+                           "may require higher values. "
+                           "Rescaling can be disabled by using -s -1.")
+    parser.add_option("-v", "--verbose",
+                      action="store_true",
+                      dest="verbose",
+                      help="Activates a verbose mode showing performed query "
+                           "image transformations.")
 
     options, args = parser.parse_args()
 
@@ -120,6 +137,7 @@ if __name__ == '__main__':
         min_size = craftar.settings.DEFAULT_QUERY_MIN_SIZE
 
     try:
-        search(options.token, image_list, options.color, min_size)
+        search(options.token, image_list, options.color, min_size, \
+               options.verbose)
     except KeyboardInterrupt:
         print("Leaving...")
