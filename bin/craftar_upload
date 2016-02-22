@@ -122,15 +122,15 @@ def upload(api_key, directory, collection_uuid):
 
         # Iterate over all the images in the list and upload them to the item
         for image in image_list:
+            imagename = os.path.basename(image)
             try:
                 image = craftar.create_image(
                     api_key, item=item["uuid"], filename=image
                 )
                 image_count = image_count + 1
-                print "    uploaded image '%s' " % image["name"]
+                print "    uploaded image '%s' " % imagename
             except Exception as e:
                 image_error.append((image, str(e)))
-
 
         if images_before == image_count:
             craftar.delete_item(api_key, item["uuid"])
@@ -153,13 +153,22 @@ def upload(api_key, directory, collection_uuid):
             print(" * %-40s - %s" % (path, error))
 
     if image_count > 0:
-        print(("\nThe images are available in collection "
-               "%s with tokens:" % collection["name"]))
+        print("\nThe images are available in collection '%s' uuid: '%s'" %
+              (collection["name"], collection["uuid"]))
         tokens = craftar.get_token_list(
             api_key, None, None, collection["uuid"]
         )
-        for token in tokens:
-            print(" * %s" % token["token"])
+        if not tokens:
+            print "--> Creating token..."
+            try:
+                token = craftar.create_token(api_key, collection["uuid"])
+            except Exception as e:
+                print e
+            print(" Collection token: '%s'" % token["token"])
+        else:
+            print("Collection tokens:")
+            for token in tokens:
+                print(" * %s" % token["token"])
 
 
 if __name__ == "__main__":

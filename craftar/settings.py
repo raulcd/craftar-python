@@ -7,8 +7,10 @@
 
 import platform
 
-RECOGNITION_HOSTNAME = 'https://search.craftar.net'
-MANAGEMENT_HOSTNAME = 'https://my.craftar.net'
+#RECOGNITION_HOSTNAME = 'https://search.craftar.net'
+RECOGNITION_HOSTNAME = 'http://cws.craftar.net:8080'
+#MANAGEMENT_HOSTNAME = 'https://my.craftar.net'
+MANAGEMENT_HOSTNAME = 'http://cws.craftar.net:8080'
 
 RECOGNITION_API_VERSION = "v2"
 MANAGEMENT_API_VERSION = "v0"
@@ -21,3 +23,4 @@ DEFAULT_IMG_QUALITY = 80  # for jpeg compression, recommended range [75-85]
 ALLOWED_IMG_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG')
 ALLOWED_OBJECT_TYPES = ["collection", "item", "image", "token", "media",
                         "tag", "version", "collectionbundle", "app"]
+                        
