@@ -47,14 +47,20 @@ def search(token, image_list, color, min_size, verbose):
         search_response = craftar.search(token, image, False, False, False, \
                                          color, min_size, verbose)
 
-        run_time += (1000 * (time.time() - start_time))
+        roundtrip_time = (1000 * (time.time() - start_time))
+        run_time += roundtrip_time
 
         result_list = search_response["results"]
-
         target_count += len(result_list)
+
+        print "Received response in %dms " % roundtrip_time
+        print "CraftAR processing took %dms " % \
+                                                  search_response["search_time"]
 
         if result_list:
             success_count += 1
+
+            print "Results:"
 
             for count, result in enumerate(result_list):
                 print("    %s. %s    uuid: %s    score: %s" % (count + 1, \
