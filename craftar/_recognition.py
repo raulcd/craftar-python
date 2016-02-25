@@ -17,7 +17,7 @@ import requests
 
 
 def search(token, filename, embed_custom=False, embed_tracking=False,
-           bbox=False, app_id=None, version=None, color=False,
+           bbox=False, app_id=None, strategy="none", version=None, color=False,
            min_size=settings.DEFAULT_QUERY_MIN_SIZE, verbose=False):
     """Performs a visual recognition using CraftAR's API.
 
@@ -50,6 +50,7 @@ def search(token, filename, embed_custom=False, embed_tracking=False,
             'embed_tracking': embed_tracking and 'true' or 'false',
             'bbox': bbox and 'true' or 'false',
             'app_id': app_id,
+            'strategy': strategy,
             'version': version,
         },
         files={'image': image},
