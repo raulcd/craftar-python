@@ -25,7 +25,7 @@ import sys
 import time
 
 
-def search(token, image_list, color, min_size, verbose):
+def search(token, image_list, strategy, color, min_size, verbose):
     success_count = 0
     request_count = 0
     target_count = 0
@@ -45,6 +45,7 @@ def search(token, image_list, color, min_size, verbose):
 
         # recognition
         search_response = craftar.search(token, image, False, False, False, \
+                                         '', strategy, None, \
                                          color, min_size, verbose)
 
         roundtrip_time = (1000 * (time.time() - start_time))
@@ -93,6 +94,9 @@ if __name__ == '__main__':
     parser.add_option("-p", "--image-path",
                       dest="image_path",
                       help="Path to an image or a directory of images.")
+    parser.add_option("-a", "--search-strategy",
+                      dest="search_strategy",
+                      help="Search strategy (closeup or medium-centered).")
     parser.add_option("-c", "--color",
                       action="store_true",
                       dest="color",
@@ -143,7 +147,7 @@ if __name__ == '__main__':
         min_size = craftar.settings.DEFAULT_QUERY_MIN_SIZE
 
     try:
-        search(options.token, image_list, options.color, min_size, \
-               options.verbose)
+        search(options.token, image_list, options.search_strategy, \
+               options.color, min_size, options.verbose)
     except KeyboardInterrupt:
         print("Leaving...")
