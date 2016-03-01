@@ -6,7 +6,8 @@
 "Provides functions for accessing the CraftAR's management API."
 
 from craftar._common import _get_object_list, _get_object, _create_object, \
-    _create_object_multipart, _update_object, _delete_object
+    _create_object_multipart, _update_object, _update_object_multipart,  \
+    _delete_object
 from craftar import settings
 
 
@@ -122,6 +123,12 @@ def create_image(api_key, item, filename):
     data = {'item': _get_object_uri('item', item)}
 
     return _create_object_multipart(api_key, "image", files, data)
+
+
+def update_image(api_key, uuid, filename):
+    "Update the image file, identified by @uuid"
+    files = {'file': open(filename, 'rb')}
+    return _update_object_multipart(api_key, "image", uuid, files, None)
 
 
 def delete_image(api_key, uuid):

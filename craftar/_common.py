@@ -155,6 +155,18 @@ def _update_object(api_key, object_type, uuid, data):
     return (response.status_code == 202)
 
 
+def _update_object_multipart(api_key, object_type, uuid, files, data):
+    "Update a single object with an attachment (image file)"
+    _validate(object_type=object_type, data=data, uuid=uuid)
+    response = requests.put(
+        url=_get_url(api_key, object_type, uuid),
+        data=data,
+        files=files,
+    )
+    _validate_response(response)
+    return (response.status_code == 202)
+
+
 def _delete_object(api_key, object_type, uuid):
     "Update a single object"
     _validate(object_type=object_type, uuid=uuid)
