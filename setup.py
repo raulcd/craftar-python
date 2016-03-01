@@ -40,7 +40,7 @@ from distutils.core import setup
 
 
 setup(name='craftar',
-      version='1.3.3',
+      version='1.3.4',
       description="CraftAR Python Library",
       long_description=__doc__,
       license="MIT",
