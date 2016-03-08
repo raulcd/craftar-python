@@ -164,19 +164,19 @@ def get_media_list(api_key, limit, offset):
 
 def get_media(api_key, uuid):
     "Return a media object, identified by @uuid"
-    return _get_object(api_key, "image", uuid)
+    return _get_object(api_key, "media", uuid)
 
 
 def create_media(api_key, filename):
     "Create a media object from a @filename, belongs to @item"
     files = {'file': open(filename, 'rb')}
 
-    return _create_object_multipart(api_key, "image", files)
+    return _create_object_multipart(api_key, "media", files, {})
 
 
 def delete_media(api_key, uuid):
     "Delete an image, identified by @uuid"
-    return _delete_object(api_key, "image", uuid)
+    return _delete_object(api_key, "media", uuid)
 
 
 # Tags
