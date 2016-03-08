@@ -52,7 +52,7 @@ def _parse_object(_object):
         del _object["resource_uri"]
 
     # parse collection, item, app and version: set uuid instead of api uri
-    keys_to_parse = ["collection", "item", "version", "app"]
+    keys_to_parse = ["collection", "item", "version", "app", "tag"]
     for key in keys_to_parse:
         if key in _object:
             _object[key] = _object[key].split("/")[-2]
