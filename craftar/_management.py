@@ -144,11 +144,24 @@ def get_token_list(api_key, limit, offset, collection=None):
                             filter=collection)
 
 
-def create_token(api_key, collection):
+def create_token(api_key, collection, tags=None):
     "Create a token, belongs to @collection"
     data = {'collection': _get_object_uri('collection', collection)}
 
+    if tags is not None:
+        data['tags'] = map(lambda uuid: _get_object_uri('tag', uuid), tags)
+
     return _create_object(api_key, "token", data)
+
+
+def update_token(api_key, uuid, tags=None):
+    "Update the tags for a given token"
+    data = {}
+
+    if tags is not None:
+        data['tags'] = map(lambda uuid: _get_object_uri('tag', uuid), tags)
+
+    return _update_object(api_key, "token", uuid, data)
 
 
 def delete_token(api_key, token):
