@@ -9,6 +9,7 @@ from craftar._common import _get_object_list, _get_object, _create_object, \
     _create_object_multipart, _update_object, _update_object_multipart,  \
     _delete_object
 from craftar import settings
+import json
 
 
 def _get_object_uri(object_type, uuid):
@@ -185,6 +186,16 @@ def create_media(api_key, filename):
     files = {'file': open(filename, 'rb')}
 
     return _create_object_multipart(api_key, "media", files, {})
+
+
+def create_video_media(api_key, url, name=None):
+    video_name = name or url.split("/")[-1]
+
+    return _create_object(api_key, "media", {
+        'mimetype': 'video',
+        'name': video_name,
+        'meta': json.dumps({'video-url': url})
+    })
 
 
 def delete_media(api_key, uuid):
