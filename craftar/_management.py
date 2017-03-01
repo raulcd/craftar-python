@@ -18,9 +18,12 @@ def _get_object_uri(object_type, uuid):
 
 
 # Collections
-def get_collection_list(api_key, limit, offset):
-    "Return a list of collections, paginated by @limit and @offset"
-    return _get_object_list(api_key, "collection", limit, offset, filter=None)
+def get_collection_list(api_key, limit, offset, filters=None):
+    """Return a list of collections, paginated by @limit and @offset.
+    Filter by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "collection", limit, offset, filter=None,
+                            filters_dict=filters)
 
 
 def get_collection(api_key, uuid):
@@ -48,10 +51,12 @@ def delete_collection(api_key, uuid):
 
 
 # Items
-def get_item_list(api_key, limit, offset, collection=None):
+def get_item_list(api_key, limit, offset, collection=None, filters=None):
     """Return a list of items, paginated by @limit and @offset
-    Filter by @collection"""
-    return _get_object_list(api_key, "item", limit, offset, filter=collection)
+    Filter by @collection or by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "item", limit, offset, filter=collection,
+                            filters_dict=filters)
 
 
 def get_item(api_key, uuid):
@@ -107,10 +112,12 @@ def delete_item(api_key, uuid):
 
 
 # Images
-def get_image_list(api_key, limit, offset, item=None):
+def get_image_list(api_key, limit, offset, item=None, filters=None):
     """Return a list of images, paginated by @limit and @offset
-    Filter by @item"""
-    return _get_object_list(api_key, "image", limit, offset, filter=item)
+    Filter by @item or by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "image", limit, offset, filter=item,
+                            filters_dict=filters)
 
 
 def get_image(api_key, uuid):
@@ -138,11 +145,12 @@ def delete_image(api_key, uuid):
 
 
 # Tokens
-def get_token_list(api_key, limit, offset, collection=None):
+def get_token_list(api_key, limit, offset, collection=None, filters=None):
     """Return a list of tokens, paginated by @limit and @offset.
-    Filter by @collection"""
+    Filter by @collection or by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
     return _get_object_list(api_key, "token", limit, offset,
-                            filter=collection)
+                            filter=collection, filters_dict=filters)
 
 
 def create_token(api_key, collection, tags=None):
@@ -171,9 +179,12 @@ def delete_token(api_key, token):
 
 
 # Media objects
-def get_media_list(api_key, limit, offset):
-    """Return a list of media objects, paginated by @limit and @offset"""
-    return _get_object_list(api_key, "media", limit, offset)
+def get_media_list(api_key, limit, offset, filters=None):
+    """Return a list of media objects, paginated by @limit and @offset
+    Filter by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "media", limit, offset,
+                            filters_dict=filters)
 
 
 def get_media(api_key, uuid):
@@ -204,10 +215,12 @@ def delete_media(api_key, uuid):
 
 
 # Tags
-def get_tag_list(api_key, limit, offset, collection=None):
+def get_tag_list(api_key, limit, offset, collection=None, filters=None):
     """Return a list of tags, paginated by @limit and @offset
-    Filter by @collection"""
-    return _get_object_list(api_key, "tag", limit, offset, filter=collection)
+    Filter by @collection or by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "tag", limit, offset, filter=collection,
+                            filters_dict=filters)
 
 
 def get_tag(api_key, uuid):
@@ -231,10 +244,12 @@ def delete_tag(api_key, uuid):
 
 
 # Applications
-def get_app_list(api_key, limit, offset):
+def get_app_list(api_key, limit, offset, filters=None):
     """Return a list of applications, paginated by @limit and @offset
-    Filter by @collection"""
-    return _get_object_list(api_key, "app", limit, offset)
+    Filter by @collection or by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "app", limit, offset,
+                            filters_dict=filters)
 
 
 def get_app(api_key, uuid):
@@ -258,10 +273,12 @@ def delete_app(api_key, uuid):
 
 
 # SDK Versions
-def get_version_list(api_key, limit, offset):
+def get_version_list(api_key, limit, offset, filters=None):
     """Return a list of SDK versions, paginated by @limit and @offset
-    Filter by @collection"""
-    return _get_object_list(api_key, "version", limit, offset)
+    Filter by @collection or by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "version", limit, offset,
+                            filters_dict=filters)
 
 
 def get_version(api_key, uuid):
@@ -270,10 +287,12 @@ def get_version(api_key, uuid):
 
 
 # Collection Bundles
-def get_bundle_list(api_key, limit, offset):
+def get_bundle_list(api_key, limit, offset, filters=None):
     """Return a list of bundles, paginated by @limit and @offset
-    Filter by @collection"""
-    return _get_object_list(api_key, "collectionbundle", limit, offset)
+    Filter by @collection or by providing a dictionary with filter name
+    and value with @filters as described in the API documentation."""
+    return _get_object_list(api_key, "collectionbundle", limit, offset,
+                            filters_dict=filters)
 
 
 def get_bundle(api_key, uuid):

@@ -8,6 +8,7 @@
 import json
 import re
 import requests
+from urllib import urlencode
 from craftar import settings
 
 HEADERS = {
@@ -38,7 +39,11 @@ def _validate_response(response):
     "Validate the response from the API. Raise API, HTTP and url errors"
     try:
         # if there is an error message
-        msg = response.json()["error_message"]
+        json_resp = response.json()
+        if "error_message" in json_resp:
+            msg = json_resp["error_message"]
+        else:
+            msg = json_resp["error"]
         raise Exception("Error %s: %s" % (response.status_code, msg))
     except (ValueError, KeyError):
         # if there is not error message, but there is an error
@@ -67,7 +72,7 @@ def _parse_object(_object):
 
 
 def _get_url(api_key, object_type, uuid=None, limit=None, offset=None,
-             filter=None):
+             filter=None, filters_dict=None):
     "Return a valid API url, based on the parameters"
     _validate(object_type=object_type, uuid=uuid)
     resource_name = object_type
@@ -86,15 +91,19 @@ def _get_url(api_key, object_type, uuid=None, limit=None, offset=None,
             url += "&collection__uuid=%s" % filter
         elif object_type == 'image':
             url += "&item__uuid=%s" % filter
+    if filters_dict and isinstance(filters_dict, dict):
+        url += "&{}".format(urlencode(filters_dict))
+
     return url
 
 
 def _get_object_list(api_key, object_type, limit=20, offset=0,
-                     filter=None):
+                     filter=None, filters_dict=None):
     "Get a list of objects"
     _validate(object_type=object_type)
 
-    url = _get_url(api_key, object_type, None, limit, offset, filter)
+    url = _get_url(api_key, object_type, None, limit, offset, filter,
+                   filters_dict)
     response = requests.get(url)
     _validate_response(response)
 
