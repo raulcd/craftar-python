@@ -8,7 +8,11 @@
 import json
 import re
 import requests
-from urllib.parse import urlencode
+try:
+    from urllib import urlencode
+except ImportError:
+    # Fallback to maintain backward compatibility with Python 2
+    from urllib.parse import urlencode
 from craftar import settings
 
 HEADERS = {
