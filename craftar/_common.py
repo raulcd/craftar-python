@@ -8,7 +8,7 @@
 import json
 import re
 import requests
-from urllib import urlencode
+from urllib.parse import urlencode
 from craftar import settings
 
 HEADERS = {
