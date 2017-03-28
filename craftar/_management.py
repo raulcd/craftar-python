@@ -267,11 +267,6 @@ def create_app(api_key, collection, name):
     return _create_object(api_key, "app", data)
 
 
-def delete_app(api_key, uuid):
-    "Delete an application, identified by @uuid"
-    return _delete_object(api_key, "app", uuid)
-
-
 # SDK Versions
 def get_version_list(api_key, limit, offset, filters=None):
     """Return a list of SDK versions, paginated by @limit and @offset
