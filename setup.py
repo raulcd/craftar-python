@@ -40,7 +40,7 @@ from distutils.core import setup
 
 
 setup(name='craftar',
-      version='1.3.8',
+      version='1.3.9',
       description="CraftAR Python Library",
       long_description=__doc__,
       license="MIT",
@@ -70,5 +70,5 @@ setup(name='craftar',
       bugtrack_url="https://github.com/Catchoom/craftar-python/issues",
       packages=["craftar"],
       scripts=['bin/craftar_search', 'bin/craftar_upload'],
-      install_requires=["requests==2.4.1", "Pillow==2.5.3"]
+      install_requires=["requests==2.20.0", "Pillow==2.5.3"]
       )

@@ -1,3 +1,6 @@
+## 1.3.9
+    - Update requests
+
 ## 1.3.0
     - Support for python 3
 
