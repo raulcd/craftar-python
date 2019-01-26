@@ -124,7 +124,7 @@ the recognition:
 7. Done! You can print the result:
 
     ```python
-    print result_list
+    print(result_list)
     ```
    - Each returned reference _image_ has an associated _score_,
      indicating its relevancy to the query image.
